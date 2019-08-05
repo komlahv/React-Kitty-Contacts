@@ -12,8 +12,8 @@ const Header = props => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#link">Link</Nav.Link>
+          <Nav.Link href="#home" onClick={(event) => props.handleClick('Home')}>Home</Nav.Link>
+          <Nav.Link href="#link" onClick={(event) => props.handleClick('Form')}>Form</Nav.Link>
         </Nav>
         <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />

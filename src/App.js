@@ -1,15 +1,17 @@
 import React from 'react';
-import ContactCard from "./ContactCard";
 import Header from "./Components/Header";
+import Contacts from './Components/Contacts';
 
 class App extends React.Component {
     constructor() {
         super();
         this.state = {
+            page: 'Home',
             unreadMessages: ["a", "b"],
             loading: false,
             character: {},
         };
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
@@ -25,30 +27,26 @@ class App extends React.Component {
             .catch(e => console.log(e))
     }
 
+    handleClick(id) {
+        this.setState({ page: id });
+        console.log(id);
+    }
+
     render() {
         let text = this.state.loading ? "Loading" : this.state.character.name;
 
         return (
             <div>
-                <Header />
-                <div className="contacts">
-                    <ContactCard
-                        contact={{ name: "Mr. Whiskerson", imgUrl: "http://placekitten.com/300/200", phone: "(212) 555-1234", email: "mr.whiskaz@catnap.meow" }}
-                    />
-
-                    <ContactCard
-                        contact={{ name: "Fluffykins", imgUrl: "http://placekitten.com/400/200", phone: "(212) 555-2345", email: "fluff@me.com" }}
-                    />
-
-                    <ContactCard
-                        contact={{ name: "Destroyer", imgUrl: "http://placekitten.com/400/300", phone: "(212) 555-3456", email: "ofworlds@yahoo.com" }}
-                    />
-
-                    <ContactCard
-                        contact={{ name: "Felix", imgUrl: "http://placekitten.com/200/100", phone: "(212) 555-4567", email: "thecat@hotmail.com" }}
-                    />
-
-                </div>
+                <Header handleClick={this.handleClick} />
+                {
+                    //Cats
+                    this.state.page === 'Home' ?
+                        <Contacts />
+                        : null
+                }
+                {
+                    this.state.page === 'Form' ? <div>Some other thing</div> : null
+                }
                 <div>
                     {
                         //conditional rendering - if there are unread messages show text else don't
