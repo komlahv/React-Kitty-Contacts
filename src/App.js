@@ -7,22 +7,27 @@ class App extends React.Component {
         super();
         this.state = {
             unreadMessages: ["a", "b"],
+            loading: false,
             character: {},
         };
     }
 
     componentDidMount() {
+        this.setState({ loading: true });
         fetch("https://swapi.co/api/people/1")
             .then(response => response.json())
             .then(data => {
                 this.setState({
-                    character: data
+                    character: data,
+                    loading: false
                 })
             })
             .catch(e => console.log(e))
     }
 
     render() {
+        let text = this.state.loading ? "Loading" : this.state.character.name;
+
         return (
             <div>
                 <Header />
@@ -52,7 +57,7 @@ class App extends React.Component {
                     }
                 </div>
                 <div>
-                    <p>{this.state.character.name}</p>
+                    <p>{text}</p>
                 </div>
             </div>
         )
