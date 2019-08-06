@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from "./Components/Header";
 import Contacts from './Components/Contacts';
+import Form from './Components/Form';
 
 class App extends React.Component {
     constructor() {
@@ -27,9 +28,9 @@ class App extends React.Component {
             .catch(e => console.log(e))
     }
 
-    handleClick(id) {
-        this.setState({ page: id });
-        console.log(id);
+    handleClick(page) {
+        this.setState({ page: page });
+        console.log(page);
     }
 
     render() {
@@ -45,7 +46,7 @@ class App extends React.Component {
                         : null
                 }
                 {
-                    this.state.page === 'Form' ? <div>Some other thing</div> : null
+                    this.state.page === 'Form' ? <Form /> : null
                 }
                 <div>
                     {
